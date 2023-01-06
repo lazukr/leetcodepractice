@@ -1,3 +1,4 @@
+// first solution
 function isPalindrome(x: number): boolean {
     const value = x.toString();
     let i = 0;
@@ -15,7 +16,20 @@ function isPalindrome(x: number): boolean {
     return true;
 }
 
-export const code = isPalindrome;
+function isPalindromeWithoutConverting(x: number): boolean {
+    const base = 10;
+    let reverse = 0;
+    let compare = x;
+    while (x > 0) {
+        reverse *= base;
+        reverse += (x % base);
+        x = Math.floor(x / base);
+    }
+
+    return compare === reverse;
+}
+
+export const code = isPalindromeWithoutConverting;
 export const cases: [number, boolean][] = [
     [-121, false],
     [-11, false],
