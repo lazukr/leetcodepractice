@@ -1,9 +1,13 @@
 // first solution
 function isPalindrome(x: number): boolean {
+
+    // n being number of digits in x (n = log10(x))
+    // O(n) for toString
     const value = x.toString();
     let i = 0;
     let j = value.length - 1;
     
+    // O(n) for this loop in when true
     while (i <= j) {
         if (value[i] !== value[j]) {
             return false;
@@ -20,6 +24,9 @@ function isPalindromeWithoutConverting(x: number): boolean {
     const base = 10;
     let reverse = 0;
     let compare = x;
+
+    // n being the number of digits in x (n = log10(x))
+    // O(n)
     while (x > 0) {
         reverse *= base;
         reverse += (x % base);
