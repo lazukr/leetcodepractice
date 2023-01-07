@@ -18,8 +18,8 @@ function longestCommonPrefix(strs: string[]): string {
 
     // grab the minimum length prefix of first word in list
     // doesn't matter which one as we only care if prefix match
-    // reason to use the smallest length is that's as long as the smallest word
-    // there is no match that would exist longer than the smallest word
+    // reason to use the smallest length is there wouldn't be a prefix match greater
+    // than the smallest word in the list
     let common = strs[0].slice(0, minLength);
 
     while (common.length > 0) {
