@@ -38,7 +38,7 @@ function twoSumButFaster(nums: number[], target: number): number[] {
         }
 
         // if not in the solution
-        // add the complement value that would correspond to a solution
+        // add the index of the complement value that would correspond to a solution
         // for example, [2, 7] looking for 9
         // in index 0, nums[0] = 2
         // we store solution[7] = 0
