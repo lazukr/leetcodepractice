@@ -14,12 +14,39 @@ function twoSum(nums: number[], target: number): number[] {
         }
     }
 
-    // safety, just return the index of the last two elements
-    return [nums.length - 2, nums.length - 1];
+    // not suppose to hit this
+    throw Error("A solution is not found.");
+};
+
+function twoSumButFaster(nums: number[], target: number): number[] {
+    // key is the number
+    // value is the index in the array
+    const solution: {[key: number]: number} = {};
+
+    // for loop -> O(N)
+    for (let i = 0; i < nums.length; i++) {
+        // if the current value exist in the dictionary
+        // then we know its complementary index
+        // so return it
+        if (solution[nums[i]] !== undefined) {
+            return [solution[nums[i]], i];
+        }
+
+        // if not in the solution
+        // add the complement value that would correspond to a solution
+        // for example, [2, 7] looking for 9
+        // in index 0, nums[0] = 2
+        // we store solution[7] = 0
+        // because the solution for 7 would be the value in index 0 (2) as 7 + 2 = 9
+        solution[target - nums[i]] = i;
+    }
+    
+    // not suppose to hit this
+    throw Error("A solution is not found.");
 };
 
 export const code = (input: any[]) => {
-    return twoSum(input[0], input[1]);
+    return twoSumButFaster(input[0], input[1]);
 };
 export const cases: [[number[], number], number[]][] = [
     [[[2,7,11,15], 9], [0, 1]],     // first two = sum
