@@ -1,4 +1,5 @@
 // first solution
+// O( N * M ^ 2)
 function longestCommonPrefix(strs: string[]): string {
     // strs.legth = N
     // smallest length of word in list = M

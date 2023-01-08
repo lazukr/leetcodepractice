@@ -1,4 +1,5 @@
 // initial solution
+// O(N ^ 2)
 function twoSum(nums: number[], target: number): number[] {
     // wants answer in index of nums array
     // let N be number of elements in array
@@ -18,6 +19,8 @@ function twoSum(nums: number[], target: number): number[] {
     throw Error("A solution is not found.");
 };
 
+
+// O(N)
 function twoSumButFaster(nums: number[], target: number): number[] {
     // key is the number
     // value is the index in the array
@@ -28,6 +31,8 @@ function twoSumButFaster(nums: number[], target: number): number[] {
         // if the current value exist in the dictionary
         // then we know its complementary index
         // so return it
+
+        // O(1)
         if (solution[nums[i]] !== undefined) {
             return [solution[nums[i]], i];
         }
@@ -38,6 +43,8 @@ function twoSumButFaster(nums: number[], target: number): number[] {
         // in index 0, nums[0] = 2
         // we store solution[7] = 0
         // because the solution for 7 would be the value in index 0 (2) as 7 + 2 = 9
+
+        // O(1)
         solution[target - nums[i]] = i;
     }
     

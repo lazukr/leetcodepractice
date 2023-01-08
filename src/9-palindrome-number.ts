@@ -1,4 +1,5 @@
 // first solution
+// O(N)
 function isPalindrome(x: number): boolean {
 
     // n being number of digits in x (n = log10(x))
@@ -20,13 +21,14 @@ function isPalindrome(x: number): boolean {
     return true;
 }
 
+// O(N)
 function isPalindromeWithoutConverting(x: number): boolean {
     const base = 10;
     let reverse = 0;
     let compare = x;
 
-    // n being the number of digits in x (n = log10(x))
-    // O(n)
+    // N being the number of digits in x (N = log10(x))
+    // O(N)
     while (x > 0) {
         reverse *= base;
         reverse += (x % base);
