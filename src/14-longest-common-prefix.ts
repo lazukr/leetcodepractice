@@ -36,10 +36,10 @@ function longestCommonPrefix(strs: string[]): string {
 
 export const code = longestCommonPrefix;
 export const cases: [string[], string][] = [
-    [["flower","flow","flight"], "fl"],
-    [["dog","racecar","car"], ""],
-    [["hello"], "hello"],
-    [["george", "geode", "gene"], "ge"],
-    [["test", "testing"], "test"],
-    [["hello", ""], ""],
+    [["flower","flow","flight"], "fl"],     // first two matches
+    [["dog","racecar","car"], ""],          // nothing matches
+    [["hello"], "hello"],                   // whole word should match
+    [["george", "geode", "gene"], "ge"],    // first two have 3 letter match, but last one is only 2
+    [["test", "testing"], "test"],          // one is substring of the other (whole word match)
+    [["hello", ""], ""],                    // empty string test
 ];

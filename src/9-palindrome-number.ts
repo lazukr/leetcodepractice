@@ -38,13 +38,13 @@ function isPalindromeWithoutConverting(x: number): boolean {
 
 export const code = isPalindromeWithoutConverting;
 export const cases: [number, boolean][] = [
-    [-121, false],
-    [-11, false],
-    [-1, false],
-    [0, true],
-    [11, true],
-    [12, false],
-    [121, true],
-    [111, true],
-    [122, false],
+    [-121, false],  // negative 3 number "palindrome"
+    [-11, false],   // negative 2 number "palindrome"
+    [-1, false],    // negative 1 number "palindrome"
+    [0, true],      // ensure 0 works
+    [11, true],     // positive palindrome
+    [12, false],    // positive non palindrome
+    [121, true],    // positive palindrome with different numbers
+    [111, true],    // positive palindrome with all same numbers
+    [122, false],   // positive non palindrome
 ];

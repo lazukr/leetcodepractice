@@ -1,3 +1,3 @@
-import { cases, code } from "./14-longest-common-prefix.js";
+import { cases, code } from "./1-two-sums.js";
 import { runTests } from "./tester.js";
 runTests(code, cases);
