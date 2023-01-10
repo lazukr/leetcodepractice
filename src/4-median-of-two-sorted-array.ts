@@ -1,4 +1,4 @@
-// first solution
+// first (trivial, i say this because leetcode suggests a log solution exists) solution
 // O(N + M)
 function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     // O(N + M)
@@ -46,7 +46,7 @@ function mergeTwoSortedArrays(nums1: number[], nums2: number[]): number[] {
     return merged;
 }
 
-// this whole function is not dependent on the number of inputs
+// this whole function is not dependent on the size of the input array
 // O(1)
 function getMedianOfArray(arr: number[]): number {
     const midpoint = Math.floor(arr.length / 2);
