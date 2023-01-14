@@ -62,55 +62,51 @@ function getMedianOfArray(arr: number[]): number {
 /* leet code is saying it should be O(LOG(N + M))
 // will need to try
 // had to use google to understand this solution
-// idea
 
+general approach 
 given two sorted arrays
 [x1, x2, x3, x4,... xn]
 [y1, y2, y3, y4,... yn]
 
-we want to partition this vertically into two equal parts 
-such that everything to the left of the partitial
-is less than everything on the right
+we want to split these into two EQUAL partitions down both arrays
+such that everything on the left is strictly less than the right
 
-to do this, we take everything below the midpoint of the first array as our left partition
-in order to balance this out, the left partition of the second array must be
-arr1 length + arr2 length - midpoint
+we can achieve this by looking at the values before and afther the split
+if we can show that the left side is strictly less than the right side
+then the median must be one of the values we selected to compare 
+(since they're in the middle due to it being equal partitions)
 
-this ensures that the resulting "vertical" divider splits the two arrays into equal parts
-e.g.
+thus we can imagine a scenario
 
-x1, x2, | x3, x4, x5
-y1, y2, y3, | y4, y5
+x1, x2, ..., x_left, x_right, .... xn
+y1, y2, ..., y_left, y_right, .... yn
 
-now the reason why we do this is because we already know x2 < x3 and y3 < y4
-if we can show x2 < y4 and y3 < x3, then we've shown everything in the left is strictly less
-than everything to the right
+we know that x_left <= x_right and y_left <= y_right
+thus if x_left <= y_right AND y_left <= x_right, 
+then everything in the left (x1 to x_left, y1 to y_left)
+is less than everything in the right (x_right to xn, y_right to yn)
 
-this effectively means that one of the edges is the median (avg of two in case of even)
+[A] if x_left > y_right, this means that our median value is towards the left for x
+this also means that all values after x_left can no longer be a candidate
+as a median value, thus they no longer need to be considered
 
-Specific details
-- we choose the smaller array to be at the top because we use it as our basis for doing partition
-    - this limits the time complexity to be dependent on the smaller array
-- a good starting place to divide is the middle of the smaller array
-- in the case of a combined list with odd elements
-    notice that when we partition the arrays, the second array will have more elements
-    e.g. x list has length of 4, y list has length of 5
-    if we take the mid point of x as 2, then y will be 3
-    this means that if this is the solution, the median must be the max of the left partitions
-    as it contains more elements
+[B] if y_left > x_right, this means that our median value is towards the right for x
+this also mean that all values up to x_right can no longer be a candidate
+as aa median value, thus they no longer need to be considered
 
-- in the case of a combined list with even elements
-    since we are splitting the two partitions into strictly left < right
-    one must be on the left side and one must be on the right side
-    thus it's the max of the partition on left and min of the partition of right
+Now we need aa good place to start splitting
+the easiest option is to just use the midpoint of the range of x
+e.g. start = 0, end = length of x, midpoint = (start + length) / 2
 
-- if we find that x2 > y4, this means we partition too much to the right
-e.g. x1 maybe < y4. Thus reduce from the end to current x partition
+And from what we outlined in [A] and [B], it follows that on every iteration,
+we constraint our range to find the midpoint by updating the start or end values to be
+whatever x_left / x_right would have been, this effectively means each iteration
+we are reducing our search items by half, which gives rise to the log time.
 
-- if we find that y3 > x3, this means we partition too much to the left
-e.g. y3 maybe < x4. so we reduce from the start to current x partition
 
-- these limit will be used to help determine where our midpoint will be
+
+
+
 */
 
 function findMedianSortedArraysInLogTime(nums1: number[], nums2: number[]): number {
@@ -121,6 +117,9 @@ function findMedianSortedArraysInLogTime(nums1: number[], nums2: number[]): numb
     const num1Length = nums1.length;
     const num2Length = nums2.length;
     const mergedMidpoint = Math.floor((num1Length + num2Length + 1) / 2);
+    // the reasion for adding 1 is due to the fact that this puts more items
+    // onto the left side, thus in the case of odd total,
+    // we can guaraantee that the value is on the left side
 
     let start = 0;
     let end = num1Length;
