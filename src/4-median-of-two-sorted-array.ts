@@ -103,7 +103,12 @@ we constraint our range to find the midpoint by updating the start or end values
 whatever x_left / x_right would have been, this effectively means each iteration
 we are reducing our search items by half, which gives rise to the log time.
 
-
+as for choosing the split for y,
+we can find the total number of items in the combine x and y
+then find the mid point value for it
+then use this value to subtract whatever midpoint we set for x
+thus this will always be a complementary number of y to ensure lhs items = rhs items
+for most cases (lhs will have more if odd)
 
 
 
@@ -119,7 +124,7 @@ function findMedianSortedArraysInLogTime(nums1: number[], nums2: number[]): numb
     const mergedMidpoint = Math.floor((num1Length + num2Length + 1) / 2);
     // the reasion for adding 1 is due to the fact that this puts more items
     // onto the left side, thus in the case of odd total,
-    // we can guaraantee that the value is on the left side
+    // we can guarantee that the value is on the left side
 
     let start = 0;
     let end = num1Length;
@@ -132,11 +137,6 @@ function findMedianSortedArraysInLogTime(nums1: number[], nums2: number[]): numb
         const leftY = leftPartitionY > 0 ? nums2[leftPartitionY - 1] : Number.MIN_SAFE_INTEGER;
         const rightX = leftPartitionX < num1Length ? nums1[leftPartitionX] : Number.MAX_SAFE_INTEGER;
         const rightY = leftPartitionY < num2Length ? nums2[leftPartitionY] : Number.MAX_SAFE_INTEGER;
-
-        console.log(nums1);
-        console.log(leftX, leftY);
-        console.log(nums2);
-        console.log(rightX, rightY);
 
         // left partition strictly less than or equal right partition
         if (leftX <= rightY &&
@@ -164,6 +164,8 @@ function findMedianSortedArraysInLogTime(nums1: number[], nums2: number[]): numb
 export const code = (input: any) => {
     return findMedianSortedArraysInLogTime(input[0], input[1]);
 }; 
+
+const BigNumber = 50000;
 export const cases: [[number[], number[]], number][] = [
     
     [[[0,0], [0,0]], 0],
@@ -173,4 +175,8 @@ export const cases: [[number[], number[]], number][] = [
     [[[1,3],[2,4]], 2.5], // two elements that are not strictly larger or smaller than each other
     [[[1,3,5,7,9,11,13,15], [2,4,6,8,10,12,14,16]], 8.5],
     [[[1,7,12,22], [4, 9, 15]], 9],
+    [[[...Array(BigNumber).keys()],[...Array(BigNumber).keys()].map(i => i + BigNumber + 1)],BigNumber]
+    // leetcode test cases aren't sufficient to notice to difference between linear vs log time experimentally
+    // thus made super large number of array with worse case possible for the log case (median is at the end)
+    // difference locally is 12 ms on linear time, 2 ms on log time.
 ];
