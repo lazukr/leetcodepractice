@@ -1,3 +1,3 @@
-import { cases, code } from "./4-median-of-two-sorted-array.js";
+import { cases, code } from "./5-longest-palindrome-string.js";
 import { runTests } from "./tester.js";
 runTests(code, cases);
