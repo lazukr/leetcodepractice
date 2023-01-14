@@ -1,5 +1,5 @@
 // initial solution
-// O( N ^ 2 )
+// O( N ^ 3 )
 function longestPalindrome(s: string): string {
     let palindrome = "";
 
@@ -9,16 +9,19 @@ function longestPalindrome(s: string): string {
         // inner for loop on s -> O(N)
         for (let end = start; end < s.length; end++) {
             const ss = s.substring(start, end + 1);
+            // the check is O(N)
+            // this is essentially a 3rd loop, thus cubic
             if (checkPalindrome(ss) && ss.length > palindrome.length) {
                 palindrome = ss;
             }
         }
     }
 
-    // total O( N ^ 2 )
+    // total O( N ^ 3 )
     return palindrome;
 };
 
+// this is O(N) for given n-element array s
 function checkPalindrome(s: string) {
     const length = s.length;
     let i = 0;
