@@ -1,3 +1,3 @@
-import { cases, code } from "./5-longest-palindrome-string.js";
+import { cases, code } from "./6-zigzag-conversion.js";
 import { runTests } from "./tester.js";
 runTests(code, cases);
