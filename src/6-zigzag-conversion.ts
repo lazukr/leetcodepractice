@@ -50,17 +50,15 @@ function convert(s: string, numRows: number): string {
 
     // for loop -> O ( R )
     for (let i = 0; i < numRows; i++) {
-        // inner for loop -> O ( N )
+        // although its an inner loop, it has elements max up to N
         for (let j = 0; j < list[i].length; j++) {
             combined += list[i][j];
         }
     }
 
-    // total: O ( R * N )
-
+    // thus this is still really more just O(MAX(R, N))
     return combined;
 };
-
 
 export const code = (input: any[]) => {
     return convert(input[0], input[1]);
@@ -83,6 +81,18 @@ Y   I   R
 
 read it from left to right, top to bottom
 -> PAHNAPLSIIGYIR
+ 12343212343212
+"PAYPALISHIRING", 4
+ 0123456789ABCD
+
+P     I     N
+A   L S   I G
+Y A   H R
+P     I
+
+
+PINALSIGYAHRPI
+
 */
 
 
