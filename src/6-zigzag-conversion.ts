@@ -29,11 +29,11 @@ function convert(s: string, numRows: number): string {
     const rowSelectorLength = rowSelector.length;
 
     // row selector should have a full cycle of numbers
-    const list: string[][] = [];
+    const list: string[] = [];
 
-    // creating a list of list that will represent each row
+    // creating an empty string representing each row
     for (let i = 0; i < numRows; i++) {
-        list.push([]);
+        list.push("");
     }
 
     // up to this point O( R )
@@ -41,19 +41,16 @@ function convert(s: string, numRows: number): string {
     // use the row selector to find which row the next string should go to
     for (let i = 0; i < s.length; i++) {
         // modulo to wrap it around
-        list[rowSelector[i % rowSelectorLength]].push(s[i]);
+        list[rowSelector[i % rowSelectorLength]] += (s[i]);
     }
 
-    // up to this point O ( MAX(R, N) ) 
+    // up to this point O (MAX(R, N)) 
 
     let combined = "";
 
     // for loop -> O ( R )
     for (let i = 0; i < numRows; i++) {
-        // although its an inner loop, it has elements max up to N
-        for (let j = 0; j < list[i].length; j++) {
-            combined += list[i][j];
-        }
+        combined += list[i];
     }
 
     // thus this is still really more just O(MAX(R, N))
